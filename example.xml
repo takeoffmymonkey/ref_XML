@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone = "yes"?>
+
+<!--Processing instruction--><?myProcessingInstruction pseudo-attribute="is just a string" ?>
+
+<!--DTD (local)--><!--Document Type Declaration--><!DOCTYPE Author
+    [<!ELEMENT Author (name*, my1:name, last.Name,text,text_complicated, entity_Link*, emptyTagElement, nameSpace)>
+
+        <!ELEMENT name (#PCDATA|subname)*><!ATTLIST name language CDATA "english">
+
+        <!ELEMENT my1:name (#PCDATA|subname)*><!ATTLIST my1:name my1:language CDATA "english">
+
+        <!ELEMENT subname (#PCDATA)><!ATTLIST subname language CDATA "english">
+
+        <!ELEMENT last.Name (#PCDATA)>
+
+        <!ELEMENT text (#PCDATA)>
+
+        <!ELEMENT text_complicated (#PCDATA)>
+
+        <!ELEMENT entity_Link (#PCDATA)><!ATTLIST entity_Link symbols (character|general) "character" >
+
+        <!ELEMENT emptyTagElement EMPTY><!ATTLIST emptyTagElement attr CDATA #IMPLIED>
+
+        <!ELEMENT nameSpace (#PCDATA)>
+
+        <!ENTITY generalEntity "Text that will be used for generalEntity">]>
+
+<!--Root element + namespace attributes -->
+<Author xmlns:my1="http://galukhin1.com" xmlns="http://galukhin.com">
+    <!--Child elements-->
+    <name>Alexander
+        <!--Sub-child element-->
+        <subname>Introvert</subname>
+    </name>
+    <!--Attribute + non-default namespace-->
+    <my1:name my1:language='russian'>Александр
+        <subname language="russian">Интроверт</subname>
+    </my1:name>
+    <last.Name>Yutusin</last.Name>
+    <text>
+        <!--Markup symbols-->
+        Здесь я говорю специальные символы с экранированием: &lt; &gt; &amp; &apos; &quot;
+    </text>
+    <text_complicated>
+        <!--CDATA Section-->
+        <![CDATA[Здесь я могу спокойно говорить <&>'" без экранирования]]></text_complicated>
+
+    <entity_Link>
+        <!--Entity Link on special characters-->
+        Повторюсь: &lt; &gt; &amp; &apos; &quot;
+    </entity_Link>
+    <entity_Link symbols="general">
+        <!--Entity Link for general purpose-->
+        Ссылаюсь на общую сущность: &generalEntity;
+    </entity_Link>
+    <!--Еmpty Tag Element-->
+    <emptyTagElement attr="bla" />
+    <!--Name space attribute-->
+    <nameSpace xmlns="http://galukhin.com">
+
+    </nameSpace>
+</Author>
